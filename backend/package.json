@@ -1,7 +1,7 @@
 {
-  "name": "photopass-backend",
+  "name": "clearpass-backend",
   "version": "1.0.0",
-  "description": "PhotoPass AI Backend API",
+  "description": "ClearPass Backend API",
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon src/server.ts",

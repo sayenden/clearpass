@@ -43,7 +43,7 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-  logger.info(`PhotoPass AI Backend running on port ${PORT}`);
+  logger.info(`ClearPass Backend running on port ${PORT}`);
 });
 
 export default app;

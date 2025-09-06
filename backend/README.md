@@ -1,10 +1,10 @@
-# PhotoPass AI Backend
+# ClearPass Backend
 
 ## Quick Setup
 
 ### 1. Install Dependencies
 ```bash
-cd /Users/sayenden/photopass-backend
+cd /Users/sayenden/clearpass-backend
 npm install
 ```
 

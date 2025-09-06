@@ -1,20 +1,92 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ClearPass
 
-# Run and deploy your AI Studio app
+> AI-powered passport photo compliance platform with global coverage, live guidance, and enterprise APIs.
 
-This contains everything you need to run your app locally.
+[![Deploy](https://img.shields.io/badge/Deploy-AWS-orange)](./backend/deploy.sh)
+[![Frontend](https://img.shields.io/badge/Frontend-React-blue)](./frontend)
+[![Backend](https://img.shields.io/badge/Backend-Node.js-green)](./backend)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1evgLJwJlyCvkW-1YT0I_C89VpR0Ni7xr
+## 🚀 Quick Start
 
-## Run Locally
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-**Prerequisites:**  Node.js
+### Backend
+```bash
+cd backend
+npm install
+cp .env.example .env
+# Add your API keys to .env
+npm run dev
+```
 
+## 🎯 Features
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- ✅ **AI Background Replacement** - Gemini-powered background processing
+- ✅ **Compliance Checking** - 100+ countries and document types
+- ✅ **Live Camera Guidance** - AR overlays for perfect positioning
+- ✅ **Print Sheet Generation** - 4x6" sheets with multiple photos
+- ✅ **Enterprise API** - Bulk processing for agencies
+- ✅ **Payment Integration** - Stripe-powered transactions
+
+## 🏗️ Architecture
+
+```
+Frontend (React + TypeScript)
+    ↓
+Backend API (Node.js + Express)
+    ↓
+AWS Infrastructure (Lambda + S3 + DynamoDB)
+    ↓
+AI Processing (Google Gemini API)
+```
+
+## 💰 Business Model
+
+- **Freemium**: Free validator + watermarked preview
+- **Consumer**: $3-6 AI-only, $7-12 human-verified
+- **Enterprise**: Usage-based API pricing
+
+## 🚀 Deploy to AWS
+
+```bash
+cd backend
+./deploy.sh prod
+```
+
+## 📊 Success Metrics
+
+- Target: >95% acceptance rate
+- Coverage: 100+ countries
+- Processing: <30 seconds per photo
+- Uptime: 99.9% SLA
+
+## 🔑 Required API Keys
+
+1. [Gemini API Key](https://makersuite.google.com/app/apikey)
+2. [Stripe Keys](https://dashboard.stripe.com/apikeys)
+3. AWS Credentials
+
+## 📁 Project Structure
+
+```
+clearpass/
+├── frontend/          # React frontend
+├── backend/           # Node.js API
+├── infrastructure/    # AWS CloudFormation
+└── docs/             # Documentation
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch
+3. Submit pull request
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file.

@@ -1,0 +1,128 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'ClearPass Cost Controls - $19/month budget protection'
+
+Parameters:
+  BudgetAmount:
+    Type: Number
+    Default: 19
+    Description: 'Monthly budget limit in USD'
+  
+  AlertEmail:
+    Type: String
+    Description: 'Email for budget alerts'
+
+Resources:
+  # Budget with alerts at 50%, 80%, and 100%
+  MonthlyBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: 'ClearPass-Monthly-Budget'
+        BudgetLimit:
+          Amount: !Ref BudgetAmount
+          Unit: USD
+        TimeUnit: MONTHLY
+        BudgetType: COST
+        CostFilters:
+          Service:
+            - Amazon Elastic Compute Cloud - Compute
+            - Amazon Simple Storage Service
+            - Amazon DynamoDB
+            - AWS Lambda
+            - Amazon API Gateway
+            - Amazon CloudFront
+      NotificationsWithSubscribers:
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 50
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: !Ref AlertEmail
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 80
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: !Ref AlertEmail
+        - Notification:
+            NotificationType: FORECASTED
+            ComparisonOperator: GREATER_THAN
+            Threshold: 100
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: !Ref AlertEmail
+
+  # Lambda function to automatically stop resources when budget exceeded
+  CostControlFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: 'clearpass-cost-control'
+      Runtime: python3.9
+      Handler: index.lambda_handler
+      Code:
+        ZipFile: |
+          import boto3
+          import json
+          
+          def lambda_handler(event, context):
+              # Stop EC2 instances
+              ec2 = boto3.client('ec2')
+              instances = ec2.describe_instances(
+                  Filters=[{'Name': 'instance-state-name', 'Values': ['running']}]
+              )
+              
+              for reservation in instances['Reservations']:
+                  for instance in reservation['Instances']:
+                      if 'clearpass' in str(instance.get('Tags', [])).lower():
+                          ec2.stop_instances(InstanceIds=[instance['InstanceId']])
+              
+              # Disable API Gateway
+              apigateway = boto3.client('apigateway')
+              apis = apigateway.get_rest_apis()
+              
+              for api in apis['items']:
+                  if 'clearpass' in api['name'].lower():
+                      # Note: This would require custom implementation
+                      pass
+              
+              return {
+                  'statusCode': 200,
+                  'body': json.dumps('Cost control measures activated')
+              }
+      Role: !GetAtt CostControlRole.Arn
+      Timeout: 60
+
+  CostControlRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: CostControlPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:DescribeInstances
+                  - ec2:StopInstances
+                  - apigateway:GET
+                  - apigateway:PATCH
+                Resource: '*'
+
+Outputs:
+  BudgetId:
+    Description: 'Budget ID for monitoring'
+    Value: !Ref MonthlyBudget

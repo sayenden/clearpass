@@ -177,7 +177,7 @@ const CaptureStep: React.FC<{ onImageSelect: (image: ImageFile) => void; }> = ({
     return (
         <div>
             <div className="text-center">
-                <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">Create Your Perfect Passport Photo</h2>
+                <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">Create Your Perfect Passport Photo with ClearPass</h2>
                 <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">Get a compliant photo in minutes using our AI-powered tool.</p>
             </div>
             

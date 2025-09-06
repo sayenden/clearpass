@@ -1,49 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Passport Photo Pro</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearPass - AI-Powered Passport Photos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
         }
-      }
     </script>
-    <script>
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    </script>
-
-<link rel="stylesheet" href="/index.css">
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0",
-    "react-dropzone": "https://aistudiocdn.com/react-dropzone@^14.3.8"
-  }
-}
-</script>
-  <script type="module" crossorigin src="/clearpass/assets/index-BeW_-yjw.js"></script>
 </head>
-  <body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-200 transition-colors duration-300">
-    <div id="root"></div>
-  </body>
+<body class="font-sans bg-slate-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">CP</span>
+                    </div>
+                    <span class="text-xl font-bold text-slate-900">ClearPass</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#how-it-works" class="text-slate-600 hover:text-indigo-600">How It Works</a>
+                    <a href="#pricing" class="text-slate-600 hover:text-indigo-600">Pricing</a>
+                    <a href="#requirements" class="text-slate-600 hover:text-indigo-600">Requirements</a>
+                    <a href="#enterprise" class="text-slate-600 hover:text-indigo-600">Enterprise</a>
+                </nav>
+                <button onclick="startDemo()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-indigo-50 to-blue-100 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6">
+                    Perfect Passport Photos
+                    <span class="text-indigo-600"> in Minutes</span>
+                </h1>
+                <p class="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
+                    AI-powered photo compliance for 100+ countries. Guaranteed acceptance or your money back.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="startDemo()" class="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors">
+                        Get Your Passport Photo
+                    </button>
+                    <a href="#how-it-works" class="border border-slate-300 text-slate-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-slate-50 transition-colors">
+                        How It Works
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-indigo-600 mb-2">99.2%</div>
+                    <div class="text-slate-600">Acceptance Rate</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-indigo-600 mb-2">100+</div>
+                    <div class="text-slate-600">Countries Supported</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-indigo-600 mb-2">50K+</div>
+                    <div class="text-slate-600">Photos Processed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">How ClearPass Works</h2>
+                <p class="text-xl text-slate-600">Get compliant passport photos in 4 simple steps</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">📷</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">1. Capture</h3>
+                    <p class="text-slate-600">Take a photo or upload an existing one</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🌍</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">2. Select</h3>
+                    <p class="text-slate-600">Choose your country and document type</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🤖</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">3. AI Process</h3>
+                    <p class="text-slate-600">AI validates and optimizes your photo</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">⬇️</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">4. Download</h3>
+                    <p class="text-slate-600">Get your compliant photo instantly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg max-w-2xl w-full p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">ClearPass Demo</h3>
+                    <button onclick="closeDemo()" class="text-slate-400 hover:text-slate-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="demoContent" class="text-center py-8">
+                    <div class="mb-6">
+                        <div class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-4xl">📸</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2">Step 1: Choose Your Method</h4>
+                        <p class="text-slate-600 mb-6">Select how you'd like to provide your photo</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button onclick="showStep2()" class="bg-indigo-600 text-white p-4 rounded-lg hover:bg-indigo-700 transition-colors">
+                            📷 Use Camera
+                        </button>
+                        <button onclick="showStep2()" class="border border-slate-300 text-slate-700 p-4 rounded-lg hover:bg-slate-50 transition-colors">
+                            📁 Upload File
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Trusted by Travelers Worldwide</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-slate-600 mb-4">"Saved me hours of retakes. The AI guidance was perfect and my visa was approved instantly!"</p>
+                    <div class="font-semibold">Sarah M.</div>
+                    <div class="text-sm text-slate-500">US Passport</div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-slate-600 mb-4">"The enterprise API integration was seamless. Processing 100+ photos daily with 99% acceptance."</p>
+                    <div class="font-semibold">Travel Agency Pro</div>
+                    <div class="text-sm text-slate-500">Enterprise Customer</div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-slate-600 mb-4">"Finally got my baby's passport photo right on the first try. The infant mode is genius!"</p>
+                    <div class="font-semibold">Mike R.</div>
+                    <div class="text-sm text-slate-500">Canada Passport</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-indigo-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Ready to Get Your Perfect Passport Photo?</h2>
+            <p class="text-xl text-indigo-100 mb-8">Join thousands of satisfied customers. 99% acceptance rate guaranteed.</p>
+            <button onclick="startDemo()" class="bg-white text-indigo-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors">
+                Start Now - It's Free
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">CP</span>
+                        </div>
+                        <span class="text-xl font-bold text-white">ClearPass</span>
+                    </div>
+                    <p class="text-sm">AI-powered passport photo compliance platform with global coverage and enterprise APIs.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Product</h3>
+                    <div class="space-y-2 text-sm">
+                        <a href="#how-it-works" class="block hover:text-white">How It Works</a>
+                        <a href="#pricing" class="block hover:text-white">Pricing</a>
+                        <a href="#requirements" class="block hover:text-white">Requirements</a>
+                        <a href="#reviews" class="block hover:text-white">Reviews</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Company</h3>
+                    <div class="space-y-2 text-sm">
+                        <a href="#about" class="block hover:text-white">About</a>
+                        <a href="#enterprise" class="block hover:text-white">Enterprise</a>
+                        <a href="#contact" class="block hover:text-white">Contact</a>
+                        <a href="#privacy" class="block hover:text-white">Privacy</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Support</h3>
+                    <div class="space-y-2 text-sm">
+                        <a href="#faq" class="block hover:text-white">FAQ</a>
+                        <a href="#contact" class="block hover:text-white">Contact</a>
+                        <a href="#status" class="block hover:text-white">Status</a>
+                        <a href="#guarantee" class="block hover:text-white">Guarantee</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-8 text-sm text-center">
+                <p>&copy; 2025 ClearPass. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function startDemo() {
+            document.getElementById('demoModal').classList.remove('hidden');
+        }
+
+        function closeDemo() {
+            document.getElementById('demoModal').classList.add('hidden');
+        }
+
+        function showStep2() {
+            document.getElementById('demoContent').innerHTML = `
+                <div class="mb-6">
+                    <div class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-4xl">🌍</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Step 2: Select Country & Document</h4>
+                    <p class="text-slate-600 mb-6">Choose your destination and document type</p>
+                </div>
+                <div class="space-y-4">
+                    <select class="w-full p-3 border border-slate-300 rounded-lg">
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>United Kingdom</option>
+                        <option>Australia</option>
+                        <option>Germany</option>
+                    </select>
+                    <select class="w-full p-3 border border-slate-300 rounded-lg">
+                        <option>Passport</option>
+                        <option>Visa Application</option>
+                        <option>Green Card</option>
+                        <option>Driver's License</option>
+                    </select>
+                    <button onclick="showStep3()" class="w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors">
+                        Continue to AI Processing
+                    </button>
+                </div>
+            `;
+        }
+
+        function showStep3() {
+            document.getElementById('demoContent').innerHTML = `
+                <div class="mb-6">
+                    <div class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-4xl">🤖</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Step 3: AI Processing Complete!</h4>
+                    <p class="text-slate-600 mb-6">Your photo has been optimized for compliance</p>
+                </div>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                    <div class="flex items-center text-green-800">
+                        <span class="text-2xl mr-2">✅</span>
+                        <div>
+                            <div class="font-semibold">Compliance Check Passed</div>
+                            <div class="text-sm">Your photo meets all US Passport requirements</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button class="bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors">
+                        📱 Download Digital
+                    </button>
+                    <button class="border border-slate-300 text-slate-700 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                        🖨️ Download Print Sheet
+                    </button>
+                </div>
+                <p class="text-sm text-slate-500 mt-4">
+                    This is a demo. <a href="https://github.com/sayenden/clearpass" class="text-indigo-600 hover:underline">View the full source code on GitHub</a>
+                </p>
+            `;
+        }
+    </script>
+</body>
 </html>

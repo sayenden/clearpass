@@ -2,6 +2,20 @@
 
 > AI-powered passport photo compliance platform with global coverage, live guidance, and enterprise APIs.
 
+[![Live Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://sayenden.github.io/clearpass/)
+
+## 🌐 Live Demo
+
+**Try ClearPass now**: https://sayenden.github.io/clearpass/
+
+*Demo features:*
+- ✅ Complete UI/UX experience
+- ✅ Multi-step workflow demonstration
+- ✅ Camera integration and file upload
+- ✅ Country/document selection (100+ options)
+- ✅ Mock AI processing simulation
+- ✅ Photo editor with zoom/positioning
+- ✅ Download functionality
 [![Deploy](https://img.shields.io/badge/Deploy-AWS-orange)](./backend/deploy.sh)
 [![Frontend](https://img.shields.io/badge/Frontend-React-blue)](./frontend)
 [![Backend](https://img.shields.io/badge/Backend-Node.js-green)](./backend)
